@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "d0633e57-886f-49af-aa74-9d00c18b9e94",
+		"name": "qa-fintech-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46204948"
+	},
+	"item": [
+		{
+			"name": "transfer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has transactionId\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"transactionId\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fromAccount\": \"12345678\",\n  \"toAccount\": \"87654321\",\n  \"amount\": 250.00,\n  \"currency\": \"USD\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/transfer",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fromAccount\": \"12345678\",\n  \"toAccount\": \"87654321\",\n  \"amount\": 250.00,\n  \"currency\": \"USD\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/transfer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transfer"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"status\": \"success\",\n  \"transactionId\": \"TX123456789\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://1b6d6ff7-bb16-40b4-8b7d-6f3f0ad8aa59.mock.pstmn.io"
+		}
+	]
+}
